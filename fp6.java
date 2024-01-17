@@ -1,42 +1,71 @@
-//Simple GUI program
+// Login page gui 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class fp6{
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(()->{
-            gui();
-        });
+public class fp6 extends JFrame implements ActionListener{
+    
+    //Declaring components
+    private JLabel userLabel,passLabel,message;
+    private JTextField userField;
+    private JPasswordField passField;
+    private JButton loginButton;
+   
+    //Creating constructor
+    public fp6(){
+        super("Login Page");
+        setSize(400,300);
+        setLayout(new GridLayout(4,2));
+        
+        //Initializing components 
+        userLabel = new JLabel("Username");
+        passLabel = new JLabel("Password");
+        message  = new JLabel();
+        userField = new JTextField();
+        passField = new JPasswordField();
+        loginButton = new JButton("Login");
+        
+
+        // adding components to the frame
+        add(userLabel);
+        add(userField);
+        add(passLabel);
+        add(passField);
+        add(loginButton);
+       
+        add(message);
+
+        //adding action listeners to the buttons
+        loginButton.addActionListener(this);
+       
+
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+  
     }
-    private static void gui(){
-        //create a nd set up the JFrame
-        JFrame frame = new JFrame("Simple GUI Program");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void actionPerformed(ActionEvent e){
+        String username = userField.getText();
+        String password = new String(passField.getPassword());
 
-        //create and set up the content pane
-        JPanel panel  = new JPanel();
-        panel.setLayout(new FlowLayout());
+        String actualUsername = "Hello World";
+        String actualPassword = "1234567";
 
-        //Create a button
-        JButton button = new JButton("Click Here");
+        if(username.isEmpty() || password.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Please enter both username and password");
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(frame,"Button Clicked");
-            }
-        });
+        }
+        else if(username.compareTo(actualUsername) !=0 &&password.compareTo(actualPassword)!=0  ){
+            JOptionPane.showMessageDialog(this,"Incorrect username or password");
 
-        //Add components to the content panel
-        panel.add(button);
-
-        frame.setContentPane(panel);
-
-        frame.setSize(300,300);
-        frame.setLocationRelativeTo(null);  //center the frame on the screen
-        frame.setVisible(true);
-
+        }
+        else{
+           String name= JOptionPane.showInputDialog("Enter your name");
+            JOptionPane.showMessageDialog(this,"Welcome, "+name);
+        }
+    }
+    public static void main(String[] args) {
+        new fp6();
     }
 }
