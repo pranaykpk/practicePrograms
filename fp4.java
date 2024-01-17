@@ -76,7 +76,7 @@ class Node{
             if(root == null){
                 return 0;
             }
-            Queue<Node> q = new LinkedList<>();
+           Queue<Node> q = new LinkedList<>();
             q.add(root);
             q.add(null);
             while(!q.isEmpty()){
